@@ -58,4 +58,25 @@ RSpec.describe 'Playing the sample games' do
       expect(result['players']).to eq(expected_players)
     end
   end
+
+  describe 'rolls_3.json (hand-designed)' do
+    subject(:result) { play('rolls_3.json') }
+
+    let(:expected_players) do
+      [
+        { 'name' => 'Peter', 'money' => 40, 'space' => 'GO' },
+        { 'name' => 'Billy', 'money' => -4, 'space' => 'Massizim' },
+        { 'name' => 'Charlotte', 'money' => 2, 'space' => 'Gami Chicken' },
+        { 'name' => 'Sweedal', 'money' => 8, 'space' => 'Massizim' }
+      ]
+    end
+
+    it 'reports the winner' do
+      expect(result['winners']).to eq(['Peter'])
+    end
+
+    it 'reports every player' do
+      expect(result['players']).to eq(expected_players)
+    end
+  end
 end
