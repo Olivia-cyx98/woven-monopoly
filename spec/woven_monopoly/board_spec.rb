@@ -47,3 +47,4 @@ RSpec.describe WovenMonopoly::Board do
       expect(board.colour_group('Red').size).to eq(1)
     end
   end
+end
