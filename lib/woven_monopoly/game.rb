@@ -15,6 +15,10 @@ module WovenMonopoly
       @rules = rules
     end
 
+    def result
+      Result.new(players: players, board: board)
+    end
+
     def play
       rolls.each_with_index do |roll, turn|
         player = players[turn % players.size]

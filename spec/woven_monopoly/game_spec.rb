@@ -58,4 +58,9 @@ RSpec.describe WovenMonopoly::Game do
       expect(find_player(game, 'Billy').position).to eq(0)
     end
   end
+
+  it 'reports the result of the game' do
+    game = play([4])
+    expect(game.result.winners).to eq(['Peter'])
+  end
 end
