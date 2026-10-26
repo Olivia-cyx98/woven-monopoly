@@ -177,10 +177,10 @@ player not winning.
 ```
 Winner: Peter
 
-Peter         $40  GO
-Billy         $-4  Massizim
-Charlotte      $2  Gami Chicken
-Sweedal        $8  Massizim
+Peter      $40             GO
+Billy      -$4 (bankrupt)  Massizim
+Charlotte  $2              Gami Chicken
+Sweedal    $8              Massizim
 ```
 
 The first run didn't match, because `rolls_3.json` still contained an earlier
@@ -197,10 +197,10 @@ Charlotte went bankrupt, ending the game. Peter had the most money.
 ```
 Winner: Peter
 
-Peter         $40  Massizim
-Billy         $14  GO
-Charlotte     $-1  Gami Chicken
-Sweedal        $1  Gami Chicken
+Peter      $40             Massizim
+Billy      $14             GO
+Charlotte  -$1 (bankrupt)  Gami Chicken
+Sweedal    $1              Gami Chicken
 ```
 
 ```json
@@ -240,10 +240,10 @@ Sweedal went bankrupt, ending the game. Charlotte had the most money.
 ```
 Winner: Charlotte
 
-Peter          $5  Lanzhou Beef Noodle
-Billy         $20  Fast Kebabs
-Charlotte     $31  GO
-Sweedal       $-2  Massizim
+Peter      $5              Lanzhou Beef Noodle
+Billy      $20             Fast Kebabs
+Charlotte  $31             GO
+Sweedal    -$2 (bankrupt)  Massizim
 ```
 
 ```json
