@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
-
 module WovenMonopoly
   # Reads a board JSON file and builds a Board from it.
   module BoardLoader

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'json'
-
 module WovenMonopoly
   # Reads a rolls JSON file: a list of dice rolls used in turn order.
   module RollsLoader
