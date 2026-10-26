@@ -9,8 +9,8 @@ require_relative 'woven_monopoly/rolls_loader'
 require_relative 'woven_monopoly/rule'
 require_relative 'woven_monopoly/game'
 require_relative 'woven_monopoly/result'
-require_relative 'formatters/json_formatter'
-require_relative 'formatters/text_formatter'
+require_relative 'woven_monopoly/formatters/json_formatter'
+require_relative 'woven_monopoly/formatters/text_formatter'
 require_relative 'woven_monopoly/cli'
 
 # Loads all Woven Monopoly classes.
