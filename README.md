@@ -142,6 +142,13 @@ bin/woven_monopoly
 16. **Rolls must be whole numbers above 0.** Anything else is rejected with an
     error rather than guessed at. An empty rolls file is allowed: nobody moves,
     and everyone ties on $16.
+17. **Landing on a space of any type other than `property` does nothing.** The
+    board format only defines GO and properties, so a new type has no rule to
+    follow yet. Ignoring it lets the board still load and play, rather than
+    rejecting it.
+18. **A bankrupt player's money is reported as a negative number**, not
+    rounded up to $0, because it shows how much they owe. The JSON output also
+    marks them with `"bankrupt": true`.
 
 ## rolls_3.json
 
