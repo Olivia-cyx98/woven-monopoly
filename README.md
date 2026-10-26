@@ -10,7 +10,8 @@ the dice rolls are fixed in advance, so every game is deterministic.
 ## Requirements
 
 - Ruby 3.1 (the exact version is in `.ruby-version`). The code avoids Ruby 3.2+
-  features, so it should also run on JRuby.
+  features, so it should also run on JRuby 9.4, which targets Ruby 3.1. I
+  haven't tested that yet (see "What I would do next").
 - Bundler, for the tests and linter only. The program itself needs no gems.
 
 `.ruby-version` pins 3.1.7 for version managers like rbenv. If you have a
@@ -312,6 +313,10 @@ Sweedal    -$2 (bankrupt)  Massizim
   behaviour without growing `Rules`.
 - **Make the players and starting money configurable** through command-line
   options or a config file.
+- **Run the tests on JRuby in CI.** Production runs JRuby, and the code only
+  uses Ruby 3.1 features and the standard library, but I've only tested it on
+  CRuby 3.1.7. A GitHub Actions matrix with Ruby 3.1 and JRuby 9.4 (which
+  targets Ruby 3.1) would catch any differences.
 
 ## AI usage
 
