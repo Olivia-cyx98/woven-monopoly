@@ -39,7 +39,7 @@ module WovenMonopoly
     def take_turn(player, roll)
       move = board.move(player.position, roll)
       player.position = move.position
-      rules.pass_go(player) if move.passed_go
+      rules.pass_go(player, move.times_passed_go) if move.times_passed_go.positive?
       rules.land(player, board.space_at(move.position))
     end
   end

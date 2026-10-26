@@ -21,15 +21,19 @@ RSpec.describe WovenMonopoly::Board do
 
   describe '#move' do
     it 'moves forward without passing GO' do
-      expect(board.move(0, 2)).to have_attributes(position: 2, passed_go: false)
+      expect(board.move(0, 2)).to have_attributes(position: 2, times_passed_go: 0)
     end
 
     it 'wraps around and passes GO' do
-      expect(board.move(3, 2)).to have_attributes(position: 1, passed_go: true)
+      expect(board.move(3, 2)).to have_attributes(position: 1, times_passed_go: 1)
     end
 
     it 'counts landing exactly on GO as passing it' do
-      expect(board.move(2, 2)).to have_attributes(position: 0, passed_go: true)
+      expect(board.move(2, 2)).to have_attributes(position: 0, times_passed_go: 1)
+    end
+
+    it 'counts every lap when one roll goes round the board more than once' do
+      expect(board.move(3, 6)).to have_attributes(position: 1, times_passed_go: 2)
     end
   end
 

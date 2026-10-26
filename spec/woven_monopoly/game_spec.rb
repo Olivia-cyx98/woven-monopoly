@@ -33,6 +33,11 @@ RSpec.describe WovenMonopoly::Game do
     expect(find_player(game, 'Peter').money).to eq(17)
   end
 
+  it 'pays $1 for every lap when one roll passes GO more than once' do
+    game = play([8])
+    expect(find_player(game, 'Peter').money).to eq(18)
+  end
+
   it 'uses every roll when nobody goes bankrupt' do
     game = play([1, 1, 1, 1, 1])
     expect(find_player(game, 'Peter').position).to eq(2)

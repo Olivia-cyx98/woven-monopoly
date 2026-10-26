@@ -25,6 +25,11 @@ RSpec.describe WovenMonopoly::Rules do
       rules.pass_go(peter)
       expect(peter.money).to eq(17)
     end
+
+    it 'gives $1 for each time the player passes GO' do
+      rules.pass_go(peter, 2)
+      expect(peter.money).to eq(18)
+    end
   end
 
   describe '#land' do

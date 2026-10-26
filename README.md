@@ -117,19 +117,22 @@ bin/woven_monopoly
    richest player wins, since the rolls are the only input to the game.
 7. **Landing exactly on GO counts as passing it** and earns $1, because the
    player has completed a full lap.
-8. **The GO bonus is paid before the landing is resolved.** A player passing GO
+8. **A roll that goes round the board more than once earns $1 for every lap.**
+   On a board with fewer spaces than the roll, the player passes GO each time
+   round, so each pass is paid.
+9. **The GO bonus is paid before the landing is resolved.** A player passing GO
    collects $1 before buying or paying rent, as in standard Monopoly.
-9. **Everyone tied on the most money is a winner**, which is why `winners` is
-   a list. Tied winners are listed in turn order.
-10. **Bankrupt players are never winners.**
-11. **Owning every property in a colour group doubles the rent, whatever the
+10. **Everyone tied on the most money is a winner**, which is why `winners` is
+    a list. Tied winners are listed in turn order.
+11. **Bankrupt players are never winners.**
+12. **Owning every property in a colour group doubles the rent, whatever the
     group's size**, including a group with only one property, so the rule
     behaves the same on any board.
-12. **Landing on your own property does nothing.**
-13. **Rolls are used one per turn, in player order**: Peter, Billy, Charlotte,
+13. **Landing on your own property does nothing.**
+14. **Rolls are used one per turn, in player order**: Peter, Billy, Charlotte,
     Sweedal, then back to Peter.
-14. **GO is the first space on the board**, since everyone "starts on GO."
-15. **Rolls must be whole numbers above 0.** Anything else is rejected with an
+15. **GO is the first space on the board**, since everyone "starts on GO."
+16. **Rolls must be whole numbers above 0.** Anything else is rejected with an
     error rather than guessed at. An empty rolls file is allowed: nobody moves,
     and everyone ties on $16.
 

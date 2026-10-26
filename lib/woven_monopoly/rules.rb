@@ -10,8 +10,8 @@ module WovenMonopoly
       @board = board
     end
 
-    def pass_go(player)
-      player.receive(GO_BONUS)
+    def pass_go(player, times = 1)
+      player.receive(GO_BONUS * times)
     end
 
     def land(player, space)

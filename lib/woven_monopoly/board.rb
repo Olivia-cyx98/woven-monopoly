@@ -3,7 +3,7 @@
 module WovenMonopoly
   # The ring of spaces players move around. GO is the first space.
   class Board
-    Move = Struct.new(:position, :passed_go, keyword_init: true)
+    Move = Struct.new(:position, :times_passed_go, keyword_init: true)
 
     attr_reader :spaces
 
@@ -21,9 +21,10 @@ module WovenMonopoly
       spaces.fetch(position)
     end
 
+    # A roll bigger than the board goes round more than once, passing GO each lap.
     def move(from, roll)
       total = from + roll
-      Move.new(position: total % size, passed_go: total >= size)
+      Move.new(position: total % size, times_passed_go: total / size)
     end
 
     def colour_group(colour)
