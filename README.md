@@ -51,6 +51,9 @@ bundle exec rubocop
 - **Integration tests** (`spec/integration/`) run the real `bin/woven_monopoly`
   command against `board.json` with all three rolls files, including the
   hand-predicted `rolls_3.json`, and check the full output.
+- **Shared helpers** (`spec/support/`) are loaded into every spec: `TestBoard`
+  builds a fresh four-space board, and `fixture(name)` returns the path to a
+  file in `spec/fixtures/`.
 
 ## Design
 
@@ -61,6 +64,7 @@ bin/woven_monopoly
   └─> CLI                reads arguments, picks the output format
        ├─> BoardLoader   board.json  → Board (a list of Spaces)
        ├─> RollsLoader   rolls.json  → list of numbers
+       │    └─> JsonFile both loaders read and parse files through this
        └─> Game          takes turns until bankruptcy or the rolls run out
             ├─> Player   money and position
             ├─> Rules    passing GO, buying, rent, doubled rent
@@ -87,9 +91,10 @@ bin/woven_monopoly
 - **Data is separate from presentation.** `Result#to_h` builds the output data
   once. The JSON and text formatters only decide how it looks, so adding a new
   format means adding one formatter.
-- **Clear errors for bad input.** The loaders turn missing files, invalid JSON
-  and invalid rolls into an `InputError` with a readable message, which the CLI
-  prints. Real bugs are not caught, so they still fail loudly.
+- **Clear errors for bad input.** Both loaders read files through `JsonFile`,
+  which turns a missing file or invalid JSON into an `InputError` with a
+  readable message. `RollsLoader` also rejects invalid rolls the same way. The
+  CLI prints these errors. Real bugs are not caught, so they still fail loudly.
 - **Errors go to standard error.** This keeps the `--json` output valid JSON.
 - **Ownership is stored on the board's spaces.** This keeps the model simple,
   but it means a board object belongs to one game. The CLI loads a fresh board
@@ -270,8 +275,6 @@ Sweedal       $-2  Massizim
 
 ## What I would do next
 
-- **Extract the shared file-reading code** in `BoardLoader` and `RollsLoader`
-  into one helper, since both read JSON and handle the same errors.
 - **Validate the board more strictly**: check that GO is the first space and
   that every property has a price and a colour, with a clear error if not.
 - **Make space types their own classes** (for example `GoSpace` and
