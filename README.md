@@ -175,22 +175,23 @@ player not winning.
 - Charlotte: $2 on Gami Chicken
 - Sweedal: $8 on Massizim
 
-| Turn | Player | Roll | Lands on | What happens |
-|---|---|---|---|---|
-| 1 | Peter | 7 | Gami Chicken | Buys ($4) |
-| 2 | Billy | 3 | The Grand Tofu | Buys ($2) |
-| 3 | Charlotte | 5 | Betty's Burgers | Buys ($3) |
-| 4 | Sweedal | 1 | The Burvale | Buys ($1) |
-| 5 | Peter | 1 | Massizim | Buys ($4), completes Blue |
-| 6 | Billy | 1 | Lanzhou Beef Noodle | Buys ($2), completes Red |
-| 7 | Charlotte | 1 | YOMG | Buys ($3), completes Green |
-| 8 | Sweedal | 1 | Fast Kebabs | Buys ($1), completes Brown |
-| 9 | Peter | 2 | The Burvale | Passes GO (+$1), pays Sweedal $2 |
-| 10 | Billy | 3 | Gami Chicken | Pays Peter $8 |
-| 11 | Charlotte | 1 | Gami Chicken | Pays Peter $8 |
-| 12 | Sweedal | 6 | Massizim | Pays Peter $8 |
-| 13 | Peter | 8 | GO | Lands exactly on GO (+$1) |
-| 14 | Billy | 1 | Massizim | Pays Peter $8, bankrupt at -$4 |
+
+| Turn | Player    | Roll | Lands on            | What happens                     |
+| ---- | --------- | ---- | ------------------- | -------------------------------- |
+| 1    | Peter     | 7    | Gami Chicken        | Buys ($4)                        |
+| 2    | Billy     | 3    | The Grand Tofu      | Buys ($2)                        |
+| 3    | Charlotte | 5    | Betty's Burgers     | Buys ($3)                        |
+| 4    | Sweedal   | 1    | The Burvale         | Buys ($1)                        |
+| 5    | Peter     | 1    | Massizim            | Buys ($4), completes Blue        |
+| 6    | Billy     | 1    | Lanzhou Beef Noodle | Buys ($2), completes Red         |
+| 7    | Charlotte | 1    | YOMG                | Buys ($3), completes Green       |
+| 8    | Sweedal   | 1    | Fast Kebabs         | Buys ($1), completes Brown       |
+| 9    | Peter     | 2    | The Burvale         | Passes GO (+$1), pays Sweedal $2 |
+| 10   | Billy     | 3    | Gami Chicken        | Pays Peter $8                    |
+| 11   | Charlotte | 1    | Gami Chicken        | Pays Peter $8                    |
+| 12   | Sweedal   | 6    | Massizim            | Pays Peter $8                    |
+| 13   | Peter     | 8    | GO                  | Lands exactly on GO (+$1)        |
+| 14   | Billy     | 1    | Massizim            | Pays Peter$8, bankrupt at -$4    |
 
 **Actual result:** Matched the prediction exactly.
 
@@ -311,7 +312,6 @@ Sweedal    -$2 (bankrupt)  Massizim
   behaviour without growing `Rules`.
 - **Make the players and starting money configurable** through command-line
   options or a config file.
-- **Run the test suite on JRuby in CI**, since that's the production runtime.
 
 ## AI usage
 
