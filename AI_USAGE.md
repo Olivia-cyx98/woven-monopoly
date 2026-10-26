@@ -117,9 +117,9 @@ them, the output matched the prediction exactly.
 
 While reviewing the folder structure, I noticed the rules were in `rule.rb`,
 but the class inside is `Rules`. Ruby convention is that the file name matches
-the class, so I renamed it to `rules.rb`. Nothing broke, because the
-`require_relative` line matched the old name, but it was the kind of
-inconsistency that would confuse someone reading the code later.
+the class, so I renamed it to `rules.rb` and updated the `require_relative`
+line in `lib/woven_monopoly.rb`. The behaviour didn't change, but it was the
+kind of inconsistency that would confuse someone reading the code later.
 
 ## Decisions I made myself
 

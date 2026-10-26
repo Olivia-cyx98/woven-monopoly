@@ -11,7 +11,13 @@ the dice rolls are fixed in advance, so every game is deterministic.
 
 - Ruby 3.1 (the exact version is in `.ruby-version`). The code avoids Ruby 3.2+
   features, so it should also run on JRuby.
-- Bundler
+- Bundler, for the tests and linter only. The program itself needs no gems.
+
+`.ruby-version` pins 3.1.7 for version managers like rbenv. If you have a
+different Ruby installed, rbenv will refuse to run inside this folder; choose
+your version for one command with `RBENV_VERSION=<version>`, or delete
+`.ruby-version`. I developed and tested on Ruby 3.1.7, and also checked that the
+program runs on macOS's built-in Ruby 2.6.
 
 ## Setup
 
