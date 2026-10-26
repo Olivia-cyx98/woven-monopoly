@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe WovenMonopoly::BoardLoader do
-  def fixture(name)
-    File.expand_path("../fixtures/#{name}", __dir__)
-  end
-
   describe '.from_file' do
     subject(:board) { described_class.from_file(fixture('small_board.json')) }
 

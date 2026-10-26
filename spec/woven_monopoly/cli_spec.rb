@@ -3,8 +3,8 @@
 require 'stringio'
 
 RSpec.describe WovenMonopoly::CLI do
-  let(:board_path) { File.expand_path('../fixtures/small_board.json', __dir__) }
-  let(:rolls_path) { File.expand_path('../fixtures/rolls.json', __dir__) }
+  let(:board_path) { fixture('small_board.json') }
+  let(:rolls_path) { fixture('rolls.json') }
 
   def run_cli(*args)
     out = StringIO.new

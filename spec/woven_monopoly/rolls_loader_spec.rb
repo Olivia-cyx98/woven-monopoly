@@ -1,10 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe WovenMonopoly::RollsLoader do
-  def fixture(name)
-    File.expand_path("../fixtures/#{name}", __dir__)
-  end
-
   describe '.from_file' do
     it 'loads the rolls in order' do
       expect(described_class.from_file(fixture('rolls.json'))).to eq([1, 4, 2])
