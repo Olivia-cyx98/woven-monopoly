@@ -1,0 +1,4 @@
+[
+  { "name": "Brown 1", "price": 1, "colour": "Brown", "type": "property" },
+  { "name": "GO", "type": "go" }
+]

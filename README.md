@@ -92,9 +92,11 @@ bin/woven_monopoly
   once. The JSON and text formatters only decide how it looks, so adding a new
   format means adding one formatter.
 - **Clear errors for bad input.** Both loaders read files through `JsonFile`,
-  which turns a missing file or invalid JSON into an `InputError` with a
-  readable message. `RollsLoader` also rejects invalid rolls the same way. The
-  CLI prints these errors. Real bugs are not caught, so they still fail loudly.
+  which turns a missing or unreadable file or invalid JSON into an
+  `InputError` with a readable message. Both loaders then check the contents
+  the same way: `BoardLoader` names the space that's wrong (for example a
+  property with no price), and `RollsLoader` rejects invalid rolls. The CLI
+  prints these errors. Real bugs are not caught, so they still fail loudly.
 - **Errors go to standard error.** This keeps the `--json` output valid JSON.
 - **Ownership is stored on the board's spaces.** This keeps the model simple,
   but it means a board object belongs to one game. The CLI loads a fresh board
@@ -131,7 +133,9 @@ bin/woven_monopoly
 13. **Landing on your own property does nothing.**
 14. **Rolls are used one per turn, in player order**: Peter, Billy, Charlotte,
     Sweedal, then back to Peter.
-15. **GO is the first space on the board**, since everyone "starts on GO."
+15. **GO is the first space on the board**, since everyone "starts on GO." A
+    board that doesn't start with GO is rejected with an error rather than
+    played from the wrong starting space.
 16. **Rolls must be whole numbers above 0.** Anything else is rejected with an
     error rather than guessed at. An empty rolls file is allowed: nobody moves,
     and everyone ties on $16.
@@ -278,8 +282,6 @@ Sweedal    -$2 (bankrupt)  Massizim
 
 ## What I would do next
 
-- **Validate the board more strictly**: check that GO is the first space and
-  that every property has a price and a colour, with a clear error if not.
 - **Make space types their own classes** (for example `GoSpace` and
   `PropertySpace`), so new types like a tax space can add their own landing
   behaviour without growing `Rules`.

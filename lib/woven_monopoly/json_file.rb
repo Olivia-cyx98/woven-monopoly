@@ -9,6 +9,8 @@ module WovenMonopoly
       JSON.parse(File.read(path))
     rescue Errno::ENOENT
       raise InputError, "#{label} not found: #{path}"
+    rescue SystemCallError
+      raise InputError, "#{label} could not be read: #{path}"
     rescue JSON::ParserError
       raise InputError, "#{label} is not valid JSON: #{path}"
     end
