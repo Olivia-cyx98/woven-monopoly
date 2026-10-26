@@ -49,7 +49,8 @@ bundle exec rubocop
   hand-made boards so they don't depend on the sample files and prove the code
   works with any board size and any colour group size.
 - **Integration tests** (`spec/integration/`) run the real `bin/woven_monopoly`
-  command against `board.json` with each rolls file and check the full output.
+  command against `board.json` with all three rolls files, including the
+  hand-predicted `rolls_3.json`, and check the full output.
 
 ## Design
 
@@ -163,28 +164,108 @@ player not winning.
 | 13 | Peter | 8 | GO | Lands exactly on GO (+$1) |
 | 14 | Billy | 1 | Massizim | Pays Peter $8, bankrupt at -$4 |
 
-**Actual result:** TODO
+**Actual result:** Matched the prediction exactly.
+
+```
+Winner: Peter
+
+Peter         $40  GO
+Billy         $-4  Massizim
+Charlotte      $2  Gami Chicken
+Sweedal        $8  Massizim
+```
+
+The first run didn't match, because `rolls_3.json` still contained an earlier
+practice set of rolls. I recognised the output as that practice game's result,
+replaced the file with the designed rolls, and the output then matched. The
+integration test now checks this result automatically.
 
 ## Results
 
 ### rolls_1.json
 
+Charlotte went bankrupt, ending the game. Peter had the most money.
+
 ```
-TODO: paste the output of bin/woven_monopoly board.json rolls_1.json
+Winner: Peter
+
+Peter         $40  Massizim
+Billy         $14  GO
+Charlotte     $-1  Gami Chicken
+Sweedal        $1  Gami Chicken
 ```
 
 ```json
-TODO: paste the output of bin/woven_monopoly board.json rolls_1.json --json
+{
+  "winners": [
+    "Peter"
+  ],
+  "players": [
+    {
+      "name": "Peter",
+      "money": 40,
+      "space": "Massizim"
+    },
+    {
+      "name": "Billy",
+      "money": 14,
+      "space": "GO"
+    },
+    {
+      "name": "Charlotte",
+      "money": -1,
+      "space": "Gami Chicken"
+    },
+    {
+      "name": "Sweedal",
+      "money": 1,
+      "space": "Gami Chicken"
+    }
+  ]
+}
 ```
 
 ### rolls_2.json
 
+Sweedal went bankrupt, ending the game. Charlotte had the most money.
+
 ```
-TODO: paste the output of bin/woven_monopoly board.json rolls_2.json
+Winner: Charlotte
+
+Peter          $5  Lanzhou Beef Noodle
+Billy         $20  Fast Kebabs
+Charlotte     $31  GO
+Sweedal       $-2  Massizim
 ```
 
 ```json
-TODO: paste the output of bin/woven_monopoly board.json rolls_2.json --json
+{
+  "winners": [
+    "Charlotte"
+  ],
+  "players": [
+    {
+      "name": "Peter",
+      "money": 5,
+      "space": "Lanzhou Beef Noodle"
+    },
+    {
+      "name": "Billy",
+      "money": 20,
+      "space": "Fast Kebabs"
+    },
+    {
+      "name": "Charlotte",
+      "money": 31,
+      "space": "GO"
+    },
+    {
+      "name": "Sweedal",
+      "money": -2,
+      "space": "Massizim"
+    }
+  ]
+}
 ```
 
 ## What I would do next
