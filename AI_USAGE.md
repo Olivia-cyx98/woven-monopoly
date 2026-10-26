@@ -14,6 +14,19 @@
     loaders into a shared `JsonFile` helper.
   - **Checking my work:** reviewing my README and project structure, and
     helping design `rolls_3.json` and check the turn-by-turn table.
+- **Claude Code (VS Code extension):** I used it inside the repo, where it can
+  run the tests and the program itself, for:
+  - **Filling in the integration-test results** after checking them against a
+    separate simulation (see "Results the AI couldn't know" below).
+  - **Creating the shared spec helpers** (`TestBoard` and `FixtureHelpers`)
+    from step-by-step instructions, and explaining how `spec_helper.rb` loads
+    them.
+  - **Reviewing the repo against the brief.** The first review found a broken
+    require path, which it fixed in `0f6bb92`. The final review found the
+    broken bankrupt label described below, the missing session exports, and
+    that a roll going round a small board more than once only paid $1 for
+    passing GO.
+  - **Updating the wording** of the README and this file.
 
 ## How I checked the AI's work
 
@@ -25,6 +38,10 @@
   results were worked out turn by turn in a table before running the program.
 - **Integration tests on the real command.** These run `bin/woven_monopoly`
   exactly as a reviewer would, so mistakes in wiring or files show up.
+- **A separate simulation.** The results for `rolls_1.json` and
+  `rolls_2.json` were checked against a throwaway simulation written from the
+  rules alone, without using any of the project's code. Both gave the same
+  numbers.
 - **Refactors must not change the specs.** When the shared `JsonFile` helper
   was added, all the existing loader specs passed without any changes, which
   showed the behaviour was the same. I also ran the program with a missing
@@ -85,9 +102,11 @@ catch these mistakes immediately, whoever made them.
 ### 4. Results the AI couldn't know
 
 For the integration tests, the AI couldn't know the real game results, so it
-left `TODO` placeholders. I ran the program and filled them in. A test that
-only copies the program's output proves nothing if the program is wrong, so
-the results also need checking against a hand calculation.
+left `TODO` placeholders. A test that only copies the program's output proves
+nothing if the program is wrong, so the results need checking some other way.
+When I asked Claude Code to fill them in, it first wrote a separate simulation
+from the rules alone. That simulation gave the same numbers as the program,
+and only then did it fill them in.
 
 This mattered for `rolls_3.json`: the first run didn't match my prediction. I
 recognised the output as the result of an earlier practice game. The file still
@@ -124,28 +143,31 @@ inconsistency that would confuse someone reading the code later.
 
 ### 1. Showing bankrupt players clearly
 
-I changed the text output so bankrupt players are shown as `-$4 (bankrupt)`
-instead of `$-4`. I wrote the code and tests myself. I asked the AI only for
-hints on where to start, not for code.
+I wanted the text output to show bankrupt players as `-$4 (bankrupt)` instead
+of `$-4`, which is easy to misread. I chose to write this one myself because
+it's a small change to existing code, like the one I may be asked to make in
+the interview. I wrote the first version of
+`format_money` in `TextFormatter` myself, asking the AI only for hints on
+where to start, not for code.
 
-**What I changed:** I added a `[money_label]` method to `TextFormatter` that
-returns the normal `$17` style for zero or positive money, and puts the minus
-sign before the dollar sign plus `(bankrupt)` for negative money. `row` now
-uses it. [I also widened the money column so the table still lines up.]
+**What went wrong:** my version used `case money` with
+`when money.negative?`. Ruby compares that as `true === money`, which is never
+true, so the bankrupt label never appeared. I hadn't written a spec for this
+change first, and RuboCop doesn't flag it, so nothing caught it. The final
+Claude Code review spotted it because the README still showed `$-4`.
 
-**How I tested it:** I wrote a new spec,
-`spec/woven_monopoly/formatters/text_formatter_spec.rb`, first and watched it
-fail. It checks that a bankrupt player shows `-$4 (bankrupt)` and that a
-player with money still shows `$17`. Then I wrote the code, ran the full test
-suite and RuboCop, and checked the real output for `rolls_3.json`, where Billy
-goes bankrupt. The JSON output didn't change, so the integration tests were
-unaffected.
+**How it was fixed:** Claude Code added
+`spec/woven_monopoly/formatters/text_formatter_spec.rb` and ran it against my
+version, where it failed on the bankrupt player. It then replaced the `case`
+with a ternary that puts the minus sign before the dollar sign, and
+left-aligned the money column so the longer label still lines up. The spec
+also checks that a player with exactly $0 isn't marked bankrupt, and that a
+tie lists every winner. The JSON output didn't change, so the integration
+tests were unaffected.
 
-**Why I chose this one:** it's a small, self-contained change to existing
-code, similar to what I might be asked to do in the interview, so it was a
-good way to check I could change the code confidently on my own. It also
-makes the output clearer: `$-4` is easy to misread, while `-$4 (bankrupt)`
-says what happened.
+**What I learned:** the one change where I skipped writing the spec first is
+the one that didn't work. A spec that has been seen to fail is what proves the
+code works, not the code looking right.
 
 ### 2. Using one shared board in the specs
 

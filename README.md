@@ -289,4 +289,5 @@ Sweedal    -$2 (bankrupt)  Massizim
 
 ## AI usage
 
-See [AI_USAGE.md](AI_USAGE.md). Exported sessions are in `ai-sessions/`.
+See [AI_USAGE.md](AI_USAGE.md). Exported Claude Code sessions are in
+`ai-sessions/`.
