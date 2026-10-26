@@ -3,16 +3,7 @@
 RSpec.describe WovenMonopoly::Rules do
   subject(:rules) { described_class.new(board) }
 
-  let(:board) do
-    WovenMonopoly::Board.new(
-      [
-        WovenMonopoly::Space.new(name: 'GO', type: 'go'),
-        WovenMonopoly::Space.new(name: 'Brown 1', type: 'property', price: 1, colour: 'Brown'),
-        WovenMonopoly::Space.new(name: 'Brown 2', type: 'property', price: 1, colour: 'Brown'),
-        WovenMonopoly::Space.new(name: 'Red 1', type: 'property', price: 2, colour: 'Red')
-      ]
-    )
-  end
+  let(:board) { test_board }
   let(:peter) { WovenMonopoly::Player.new(name: 'Peter') }
   let(:billy) { WovenMonopoly::Player.new(name: 'Billy') }
 

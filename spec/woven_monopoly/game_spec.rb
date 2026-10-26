@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe WovenMonopoly::Game do
-  let(:board) do
-    WovenMonopoly::Board.new(test_spaces)
-  end
+  let(:board) { test_board }
 
   def play(rolls, **options)
     described_class.new(board: board, rolls: rolls, **options).play

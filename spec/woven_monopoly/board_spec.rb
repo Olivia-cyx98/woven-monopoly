@@ -3,9 +3,7 @@
 RSpec.describe WovenMonopoly::Board do
   subject(:board) { described_class.new(spaces) }
 
-  let(:spaces) do
-    test_spaces
-  end
+  let(:spaces) { test_spaces }
 
   it 'knows its size' do
     expect(board.size).to eq(4)
