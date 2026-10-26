@@ -17,9 +17,16 @@ module WovenMonopoly
         end
       end
 
+      def self.format_money(money)
+        case money
+        when money.negative? then "$#{money} (bankrupt)"
+        else "$#{money}"
+        end
+      end
+
       def self.row(player)
         format('%<name>-10s %<money>6s  %<space>s',
-               name: player[:name], money: "$#{player[:money]}", space: player[:space])
+               name: player[:name], money: format_money(player[:money]), space: player[:space])
       end
     end
   end

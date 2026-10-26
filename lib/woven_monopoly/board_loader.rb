@@ -6,12 +6,8 @@ module WovenMonopoly
   # Reads a board JSON file and builds a Board from it.
   module BoardLoader
     def self.from_file(path)
-      data = JSON.parse(File.read(path))
+      data = JsonFile.read(path, 'Board file')
       Board.new(data.map { |entry| build_space(entry) })
-    rescue Errno::ENOENT
-      raise InputError, "Board file not found: #{path}"
-    rescue JSON::ParserError
-      raise InputError, "Board file is not valid JSON: #{path}"
     end
 
     def self.build_space(entry)

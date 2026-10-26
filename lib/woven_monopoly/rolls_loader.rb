@@ -6,13 +6,9 @@ module WovenMonopoly
   # Reads a rolls JSON file: a list of dice rolls used in turn order.
   module RollsLoader
     def self.from_file(path)
-      rolls = JSON.parse(File.read(path))
+      rolls = JsonFile.read(path, 'Rolls file')
       validate!(rolls, path)
       rolls
-    rescue Errno::ENOENT
-      raise InputError, "Rolls file not found: #{path}"
-    rescue JSON::ParserError
-      raise InputError, "Rolls file is not valid JSON: #{path}"
     end
 
     def self.validate!(rolls, path)
