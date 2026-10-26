@@ -23,7 +23,12 @@ module WovenMonopoly
     private
 
     def summary(player)
-      { name: player.name, money: player.money, space: board.space_at(player.position).name }
+      {
+        name: player.name,
+        money: player.money,
+        space: board.space_at(player.position).name,
+        bankrupt: player.bankrupt?
+      }
     end
   end
 end

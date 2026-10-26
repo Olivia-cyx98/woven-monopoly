@@ -22,10 +22,10 @@ RSpec.describe 'Playing the sample games' do
 
     let(:expected_players) do
       [
-        { 'name' => 'Peter', 'money' => 40, 'space' => 'Massizim' },
-        { 'name' => 'Billy', 'money' => 14, 'space' => 'GO' },
-        { 'name' => 'Charlotte', 'money' => -1, 'space' => 'Gami Chicken' },
-        { 'name' => 'Sweedal', 'money' => 1, 'space' => 'Gami Chicken' }
+        { 'name' => 'Peter', 'money' => 40, 'space' => 'Massizim', 'bankrupt' => false },
+        { 'name' => 'Billy', 'money' => 14, 'space' => 'GO', 'bankrupt' => false },
+        { 'name' => 'Charlotte', 'money' => -1, 'space' => 'Gami Chicken', 'bankrupt' => true },
+        { 'name' => 'Sweedal', 'money' => 1, 'space' => 'Gami Chicken', 'bankrupt' => false }
       ]
     end
 
@@ -43,10 +43,10 @@ RSpec.describe 'Playing the sample games' do
 
     let(:expected_players) do
       [
-        { 'name' => 'Peter', 'money' => 5, 'space' => 'Lanzhou Beef Noodle' },
-        { 'name' => 'Billy', 'money' => 20, 'space' => 'Fast Kebabs' },
-        { 'name' => 'Charlotte', 'money' => 31, 'space' => 'GO' },
-        { 'name' => 'Sweedal', 'money' => -2, 'space' => 'Massizim' }
+        { 'name' => 'Peter', 'money' => 5, 'space' => 'Lanzhou Beef Noodle', 'bankrupt' => false },
+        { 'name' => 'Billy', 'money' => 20, 'space' => 'Fast Kebabs', 'bankrupt' => false },
+        { 'name' => 'Charlotte', 'money' => 31, 'space' => 'GO', 'bankrupt' => false },
+        { 'name' => 'Sweedal', 'money' => -2, 'space' => 'Massizim', 'bankrupt' => true }
       ]
     end
 
@@ -64,10 +64,10 @@ RSpec.describe 'Playing the sample games' do
 
     let(:expected_players) do
       [
-        { 'name' => 'Peter', 'money' => 40, 'space' => 'GO' },
-        { 'name' => 'Billy', 'money' => -4, 'space' => 'Massizim' },
-        { 'name' => 'Charlotte', 'money' => 2, 'space' => 'Gami Chicken' },
-        { 'name' => 'Sweedal', 'money' => 8, 'space' => 'Massizim' }
+        { 'name' => 'Peter', 'money' => 40, 'space' => 'GO', 'bankrupt' => false },
+        { 'name' => 'Billy', 'money' => -4, 'space' => 'Massizim', 'bankrupt' => true },
+        { 'name' => 'Charlotte', 'money' => 2, 'space' => 'Gami Chicken', 'bankrupt' => false },
+        { 'name' => 'Sweedal', 'money' => 8, 'space' => 'Massizim', 'bankrupt' => false }
       ]
     end
 

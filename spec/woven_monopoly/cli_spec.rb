@@ -21,7 +21,8 @@ RSpec.describe WovenMonopoly::CLI do
     end
 
     it 'reports each player' do
-      expect(output['players']).to include('name' => 'Charlotte', 'money' => 14, 'space' => 'Red 1')
+      expect(output['players'])
+        .to include('name' => 'Charlotte', 'money' => 14, 'space' => 'Red 1', 'bankrupt' => false)
     end
   end
 

@@ -17,13 +17,16 @@ module WovenMonopoly
         end
       end
 
-      def self.format_money(money)
-        money.negative? ? "-$#{money.abs} (bankrupt)" : "$#{money}"
+      # Bankruptcy comes from the result, so the rule lives only in Player.
+      def self.format_money(player)
+        money = player[:money]
+        amount = money.negative? ? "-$#{money.abs}" : "$#{money}"
+        player[:bankrupt] ? "#{amount} (bankrupt)" : amount
       end
 
       def self.row(player)
         format('%<name>-10s %<money>-14s  %<space>s',
-               name: player[:name], money: format_money(player[:money]), space: player[:space])
+               name: player[:name], money: format_money(player), space: player[:space])
       end
     end
   end

@@ -29,6 +29,18 @@ RSpec.describe WovenMonopoly::Formatters::TextFormatter do
     end
   end
 
+  context 'when the result marks a player bankrupt' do
+    let(:result) do
+      instance_double(WovenMonopoly::Result, winners: [], to_h: {
+                        winners: [], players: [{ name: 'Peter', money: 0, space: 'GO', bankrupt: true }]
+                      })
+    end
+
+    it 'follows the result rather than deciding from the money itself' do
+      expect(output).to match(/^Peter\s+\$0 \(bankrupt\)\s+GO$/)
+    end
+  end
+
   context 'with a tie' do
     let(:players) { [player('Peter', 16), player('Billy', 16)] }
 

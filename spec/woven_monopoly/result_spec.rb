@@ -36,18 +36,18 @@ RSpec.describe WovenMonopoly::Result do
   end
 
   describe '#to_h' do
-    let(:players) { [player('Peter', 20, 1), player('Billy', 12, 0)] }
+    let(:players) { [player('Peter', 20, 1), player('Billy', -2, 0)] }
     let(:expected) do
       {
         winners: ['Peter'],
         players: [
-          { name: 'Peter', money: 20, space: 'Brown 1' },
-          { name: 'Billy', money: 12, space: 'GO' }
+          { name: 'Peter', money: 20, space: 'Brown 1', bankrupt: false },
+          { name: 'Billy', money: -2, space: 'GO', bankrupt: true }
         ]
       }
     end
 
-    it 'reports winners, money and the name of each final space' do
+    it 'reports winners, money, the name of each final space and who is bankrupt' do
       expect(result.to_h).to eq(expected)
     end
   end

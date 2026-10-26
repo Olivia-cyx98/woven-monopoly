@@ -90,7 +90,10 @@ bin/woven_monopoly
   or players later.
 - **Data is separate from presentation.** `Result#to_h` builds the output data
   once. The JSON and text formatters only decide how it looks, so adding a new
-  format means adding one formatter.
+  format means adding one formatter. It includes a `bankrupt` flag for each
+  player (the brief allows extra fields), so the formatters never repeat the
+  bankruptcy rule. Changing what counts as bankrupt means changing only
+  `Player#bankrupt?`.
 - **Clear errors for bad input.** Both loaders read files through `JsonFile`,
   which turns a missing or unreadable file or invalid JSON into an
   `InputError` with a readable message. Both loaders then check the contents
@@ -216,22 +219,26 @@ Sweedal    $1              Gami Chicken
     {
       "name": "Peter",
       "money": 40,
-      "space": "Massizim"
+      "space": "Massizim",
+      "bankrupt": false
     },
     {
       "name": "Billy",
       "money": 14,
-      "space": "GO"
+      "space": "GO",
+      "bankrupt": false
     },
     {
       "name": "Charlotte",
       "money": -1,
-      "space": "Gami Chicken"
+      "space": "Gami Chicken",
+      "bankrupt": true
     },
     {
       "name": "Sweedal",
       "money": 1,
-      "space": "Gami Chicken"
+      "space": "Gami Chicken",
+      "bankrupt": false
     }
   ]
 }
@@ -259,22 +266,26 @@ Sweedal    -$2 (bankrupt)  Massizim
     {
       "name": "Peter",
       "money": 5,
-      "space": "Lanzhou Beef Noodle"
+      "space": "Lanzhou Beef Noodle",
+      "bankrupt": false
     },
     {
       "name": "Billy",
       "money": 20,
-      "space": "Fast Kebabs"
+      "space": "Fast Kebabs",
+      "bankrupt": false
     },
     {
       "name": "Charlotte",
       "money": 31,
-      "space": "GO"
+      "space": "GO",
+      "bankrupt": false
     },
     {
       "name": "Sweedal",
       "money": -2,
-      "space": "Massizim"
+      "space": "Massizim",
+      "bankrupt": true
     }
   ]
 }
