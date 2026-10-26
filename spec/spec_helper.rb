@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
 require_relative '../lib/woven_monopoly'
+Dir[File.join(__dir__, 'support', '**', '*.rb')].each { |file| require file }
 
 RSpec.configure do |config|
+  config.include TestBoard
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end

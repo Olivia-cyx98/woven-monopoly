@@ -4,12 +4,7 @@ RSpec.describe WovenMonopoly::Result do
   subject(:result) { described_class.new(players: players, board: board) }
 
   let(:board) do
-    WovenMonopoly::Board.new(
-      [
-        WovenMonopoly::Space.new(name: 'GO', type: 'go'),
-        WovenMonopoly::Space.new(name: 'Brown 1', type: 'property', price: 1, colour: 'Brown')
-      ]
-    )
+    WovenMonopoly::Board.new(test_spaces)
   end
 
   def player(name, money, position = 0)

@@ -4,12 +4,7 @@ RSpec.describe WovenMonopoly::Board do
   subject(:board) { described_class.new(spaces) }
 
   let(:spaces) do
-    [
-      WovenMonopoly::Space.new(name: 'GO', type: 'go'),
-      WovenMonopoly::Space.new(name: 'Brown 1', type: 'property', price: 1, colour: 'Brown'),
-      WovenMonopoly::Space.new(name: 'Brown 2', type: 'property', price: 1, colour: 'Brown'),
-      WovenMonopoly::Space.new(name: 'Red 1', type: 'property', price: 2, colour: 'Red')
-    ]
+    test_spaces
   end
 
   it 'knows its size' do
